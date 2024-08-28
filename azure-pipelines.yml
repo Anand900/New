@@ -6,18 +6,10 @@
 trigger:
 - Test
 
-pool:
-  vmImage: ubuntu-latest
-- task: Maven@4
+- task: Docker@2
   inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
